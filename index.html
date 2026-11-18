@@ -1,112 +1,70 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#171715">
-  <meta name="description" content="NOIRÉ – The Art of Modern Luxury. Premium Casualwear für jeden Tag.">
-  <title>NOIRÉ — The Art of Modern Luxury</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#171411">
+<title>NOIRÉ — The Art of Modern Luxury</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="announcement">COLLECTION N° 01 — EVERYDAY LUXURY</div>
-  <header class="site-header">
-    <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Menü öffnen">☰</button>
-    <a class="wordmark" href="#" aria-label="NOIRÉ Startseite">NOIRÉ</a>
-    <nav class="main-nav" id="mainNav">
-      <a href="#shop" data-filter="Alle">SHOP</a>
-      <a href="#shop" data-filter="Herren">MEN</a>
-      <a href="#shop" data-filter="Damen">WOMEN</a>
-      <a href="#story">OUR STORY</a>
-    </nav>
-    <div class="header-actions">
-      <button class="icon-btn" id="searchToggle" aria-label="Suche">⌕</button>
-      <button class="icon-btn bag-button" id="cartToggle" aria-label="Warenkorb">BAG <span id="cartCount">0</span></button>
-    </div>
-  </header>
+<div class="topbar">COLLECTION N° 01 &nbsp; · &nbsp; EVERYDAY LUXURY</div>
+<header class="header">
+ <button class="menu" id="menu">☰</button><a class="logo" href="#">NOIRÉ</a>
+ <nav id="nav"><a href="#men">HERREN</a><a href="#women">DAMEN</a><a href="#collection">KOLLEKTION</a><a href="#brand">DIE MARKE</a></nav>
+ <button class="bag" id="openBag">BAG <span id="count">0</span></button>
+</header>
+<main>
+ <section class="top-composition">
+  <a class="campaign men" id="men" href="#collection"><img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1200&q=90" alt="NOIRÉ Herren Kollektion"><span class="campaign-title">HERREN KOLLEKTION<small>MODERN · MINIMAL · ZEITLOS</small></span></a>
+  <div class="brand-panel"><div class="brand-title">NOIRÉ</div><div class="brand-claim">THE ART OF MODERN LUXURY</div><div class="line"></div><h2>DIE VIER MARKENELEMENTE</h2>
+   <div class="four-elements">
+    <div><figure class="wordmark-detail">NOIRÉ</figure><b>① BRUSTLOGO</b><p>Dezenter, hochwertiger Schriftzug auf der Brust.</p></div>
+    <div><figure class="n-detail">N</figure><b>② SIGNATURE-MONOGRAMM</b><p>Das exklusive NOIRÉ-Zeichen.</p></div>
+    <div><figure class="neck-detail"><strong>NOIRÉ</strong><small>THE ART OF<br>MODERN LUXURY</small></figure><b>③ NACKENLABEL</b><p>Hochwertiges Innenlabel mit Markenclaim.</p></div>
+    <div><figure class="side-detail">NOIRÉ</figure><b>④ SEITENLABEL</b><p>Feines Weblabel an der Seitennaht.</p></div>
+   </div>
+  </div>
+  <a class="campaign women" id="women" href="#collection"><img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=90" alt="NOIRÉ Damen Kollektion"><span class="campaign-title">DAMEN KOLLEKTION<small>ELEGANT · FEMININ · MODERN</small></span></a>
+ </section>
 
-  <main>
-    <section class="hero">
-      <img class="hero-image" src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=2200&q=85" alt="Editorial Fashion Kampagne">
-      <div class="hero-shade"></div>
-      <div class="hero-copy">
-        <p class="eyebrow light">THE NEW EVERYDAY</p>
-        <h1>Effortless.<br><em>Elevated.</em></h1>
-        <p>Casual essentials. Considered details.<br>Made for the moments in between.</p>
-        <a class="button button-light" href="#shop">DISCOVER COLLECTION <span>↗</span></a>
-      </div>
-      <div class="hero-index">01 / 03</div>
-    </section>
+ <section class="clothing-row" id="collection">
+  <a class="clothing"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85" alt="T-Shirt"><span>NOIRÉ SIGNATURE TEE</span></a>
+  <a class="clothing"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=85" alt="Hoodie"><span>MONOGRAM HOODIE</span></a>
+  <a class="clothing"><img src="https://images.unsplash.com/photo-1578681994506-b8f463449011?auto=format&fit=crop&w=700&q=85" alt="Sweatshirt"><span>RELAXED SWEATSHIRT</span></a>
+  <a class="clothing"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=85" alt="Damen Outfit"><span>WOMEN'S ESSENTIAL</span></a>
+ </section>
 
-    <section class="intro section-pad">
-      <p class="eyebrow">NOIRÉ — THE ART OF MODERN LUXURY</p>
-      <h2>Weniger Lautstärke.<br><em>Mehr Charakter.</em></h2>
-      <p class="intro-text">Entspannte Silhouetten, ausgewählte Materialien und Details, die nicht laut sein müssen. NOIRÉ interpretiert Casualwear mit einem Anspruch an Qualität und zeitlose Ästhetik.</p>
-    </section>
+ <section class="middle-grid" id="brand">
+  <div class="brand-story"><span class="eyebrow">DIE MARKE</span><h2>NOIRÉ</h2><p>NOIRÉ steht für zeitlose Eleganz, moderne Ästhetik und kompromisslose Qualität. Eine Marke für alle, die ihren Stil nicht zeigen müssen, um ihn zu haben.</p><div class="rule"></div><h3>FARBWELT</h3>
+   <div class="palette"><div><i class="black"></i><small>Obsidian<br>Black</small></div><div><i class="ivory"></i><small>Ivory<br>Cream</small></div><div><i class="champagne"></i><small>Champagne<br>Beige</small></div><div><i class="stone"></i><small>Stone<br>Grey</small></div></div>
+  </div>
+  <div class="clothing-row vertical">
+   <a class="clothing"><img src="https://images.unsplash.com/photo-1578681994506-b8f463449011?auto=format&fit=crop&w=650&q=85" alt="Ivory Essential"><span>IVORY ESSENTIAL</span></a>
+   <a class="clothing"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=650&q=85" alt="Black Monogram"><span>BLACK MONOGRAM</span></a>
+   <a class="clothing"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=650&q=85" alt="Signature Tee"><span>SIGNATURE TEE</span></a>
+  </div>
+ </section>
 
-    <section class="category-grid section-pad">
-      <a class="category-card category-men" href="#shop" data-filter="Herren">
-        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1100&q=80" alt="NOIRÉ Men">
-        <span class="category-overlay"><small>THE EVERYDAY EDIT</small><strong>NOIRÉ MEN</strong><b>DISCOVER ↗</b></span>
-      </a>
-      <a class="category-card category-women" href="#shop" data-filter="Damen">
-        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1100&q=80" alt="NOIRÉ Women" onerror="this.src='https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1100&q=80'">
-        <span class="category-overlay"><small>THE SOFT STATEMENT</small><strong>NOIRÉ WOMEN</strong><b>DISCOVER ↗</b></span>
-      </a>
-    </section>
+ <section class="bottom-grid">
+  <div class="packaging"><img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?auto=format&fit=crop&w=1000&q=85" alt="Premium Packaging Inspiration"><span>NOIRÉ · THE ART OF MODERN LUXURY</span></div>
+  <div class="details"><h2>DETAILS &amp; VERARBEITUNG</h2><div class="detail-images"><div><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=500&q=85" alt="Stoffdetail"><p>Hochwertige Materialien</p></div><div><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=500&q=85" alt="Nahtdetail"><p>Saubere, präzise Nähte</p></div><div><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=500&q=85" alt="Stickerei Inspiration"><p>Edle Stickereien</p></div></div></div>
+ </section>
 
-    <section class="shop-section section-pad" id="shop">
-      <div class="section-heading">
-        <div><p class="eyebrow">COLLECTION N° 01</p><h2>Everyday <em>essentials.</em></h2></div>
-        <p>Eine erste Auswahl unserer Casualwear-Ästhetik.</p>
-      </div>
-      <div class="shop-toolbar">
-        <div class="filters" id="filters">
-          <button class="filter active" data-filter="Alle">ALL</button>
-          <button class="filter" data-filter="Herren">MEN</button>
-          <button class="filter" data-filter="Damen">WOMEN</button>
-          <button class="filter" data-filter="Unisex">UNISEX</button>
-        </div>
-        <label class="sort-label">SORT <select id="sortSelect"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></label>
-      </div>
-      <div class="search-bar hidden" id="searchBar"><input id="searchInput" type="search" placeholder="Produkte suchen …"><button id="searchClose" aria-label="Suche schließen">×</button></div>
-      <div class="product-grid" id="productGrid"></div>
-      <p class="demo-note">Hinweis: Dies sind Demo-Produkte und Beispielpreise für den Shop-Prototyp. Noch keine kaufbaren Artikel.</p>
-    </section>
-
-    <section class="brand-banner">
-      <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=2000&q=85" alt="Texturen und Fashion">
-      <div class="banner-content"><p class="eyebrow light">THE NOIRÉ STANDARD</p><h2>Comfort in form.<br><em>Confidence in detail.</em></h2><a href="#story" class="text-link light-link">DISCOVER OUR APPROACH ↗</a></div>
-    </section>
-
-    <section class="story section-pad" id="story">
-      <div class="story-mark">N.</div>
-      <div><p class="eyebrow">OUR PHILOSOPHY</p><h2>Designed for everyday.<br><em>Defined by details.</em></h2><p>NOIRÉ steht für moderne Freizeitmode mit ruhiger Eleganz. Wir glauben an gute Passformen, angenehme Materialien und ein Branding, das bewusst zurückhaltend bleibt. Jedes Detail soll sich selbstverständlich anfühlen.</p></div>
-    </section>
-
-    <section class="newsletter section-pad">
-      <p class="eyebrow">STAY IN THE LOOP</p><h2>Be first to know.</h2><p>Erhalte Neuigkeiten zur ersten NOIRÉ-Kollektion.</p>
-      <form id="newsletterForm"><input type="email" id="newsletterEmail" placeholder="Deine E-Mail-Adresse" required><button type="submit">SIGN UP ↗</button></form>
-      <small id="newsletterMessage">Demo-Formular – noch nicht mit einem Newsletter-Dienst verbunden.</small>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <a class="footer-logo" href="#">NOIRÉ</a><p>THE ART OF MODERN LUXURY</p>
-    <div class="footer-links"><a href="#shop">Shop</a><a href="#story">About</a><a href="mailto:hello@noire.example">Contact</a><a href="#legal">Impressum</a><a href="#legal">Datenschutz</a></div>
-    <small>© <span id="year"></span> NOIRÉ. Demo-Shop – Angaben und Rechtstexte vor Veröffentlichung ergänzen.</small>
-  </footer>
-
-  <div class="drawer-backdrop" id="drawerBackdrop"></div>
-  <aside class="cart-drawer" id="cartDrawer" aria-label="Warenkorb">
-    <div class="drawer-head"><h2>Your bag <span id="drawerCount">(0)</span></h2><button id="cartClose" class="close-btn" aria-label="Schließen">×</button></div>
-    <div id="cartItems" class="cart-items"><p class="empty-cart">Dein Warenkorb ist noch leer.</p></div>
-    <div class="cart-bottom"><div class="subtotal"><span>Zwischensumme</span><strong id="subtotal">0,00 €</strong></div><p>Versand und Steuern werden im Checkout berechnet.</p><button class="button button-dark full" id="checkoutButton">ZUM CHECKOUT</button><small>Demo: Noch keine echte Zahlungsabwicklung eingerichtet.</small></div>
-  </aside>
-  <div class="toast" id="toast" role="status"></div>
-  <script src="script.js"></script>
-</body>
-</html>
+ <section class="shop">
+  <div class="shop-heading"><div><span class="eyebrow">COLLECTION N° 01</span><h2>EVERYDAY <i>LUXURY</i></h2></div><p>Entdecke die erste NOIRÉ-Auswahl.</p></div>
+  <div class="filters"><button class="active" data-filter="all">ALLE</button><button data-filter="men">HERREN</button><button data-filter="women">DAMEN</button><button data-filter="unisex">UNISEX</button></div>
+  <div class="products">
+   <article data-category="men unisex"><div class="product-image p1"><button class="add" data-name="NOIRÉ Signature Tee" data-price="49">IN DIE BAG +</button></div><div class="product-meta"><span>NOIRÉ Signature Tee<small>Obsidian Black · 240 GSM</small></span><b>€49</b></div></article>
+   <article data-category="men unisex"><div class="product-image p2"><button class="add" data-name="Monogram Hoodie" data-price="119">IN DIE BAG +</button></div><div class="product-meta"><span>Monogram Hoodie<small>Obsidian Black · Heavyweight</small></span><b>€119</b></div></article>
+   <article data-category="women"><div class="product-image p3"><button class="add" data-name="Ribbed Essential Top" data-price="59">IN DIE BAG +</button></div><div class="product-meta"><span>Ribbed Essential Top<small>Ivory Cream · Soft Rib</small></span><b>€59</b></div></article>
+   <article data-category="women unisex"><div class="product-image p4"><button class="add" data-name="Relaxed Sweatshirt" data-price="99">IN DIE BAG +</button></div><div class="product-meta"><span>Relaxed Sweatshirt<small>Champagne Beige · Brushed</small></span><b>€99</b></div></article>
+  </div>
+  <p class="demo">Produkte, Preise und Bilder sind aktuell Platzhalter und noch keine kaufbaren Angebote.</p>
+ </section>
+</main>
+<footer><a href="#" class="footer-logo">NOIRÉ</a><p>THE ART OF MODERN LUXURY</p><nav><a href="#men">HERREN</a><a href="#women">DAMEN</a><a href="#brand">DIE MARKE</a><a href="mailto:hello@noire-fashion.de">KONTAKT</a></nav><small>© 2026 NOIRÉ · DEMO WEBSITE</small></footer>
+<div class="overlay" id="overlay"><aside><div class="cart-head"><b>DEINE BAG</b><button id="closeBag">×</button></div><div id="items">Deine Bag ist noch leer.</div><div class="cart-total">ZWISCHENSUMME <b id="total">€0</b><p>Versand und Steuern werden später berechnet.</p><button disabled>CHECKOUT FOLGT</button></div></aside></div>
+<script src="script.js"></script>
+</body></html>
