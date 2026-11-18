@@ -1,201 +1,183 @@
 (() => {
   "use strict";
-
-  const $ = (selector, root = document) => root.querySelector(selector);
-  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-  const drawer = $("#drawer");
-  const drawerPanel = drawer?.querySelector("aside");
-  const items = $("#bagItems");
-  const count = $("#bagCount");
-  const total = $("#bagTotal");
-  const bagOpen = $("#bagOpen");
-  const bagClose = $("#bagClose");
-  const menuButton = $("#hamb");
-  const nav = $("#nav");
-  const currency = new Intl.NumberFormat("de-DE", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 2
-  });
-
-  if (!drawer || !items || !count || !total) return;
-
-  const STORAGE_KEY = "noire-bag-v1";
-  let cart = [];
+  const $ = (s, root = document) => root.querySelector(s);
+  const $$ = (s, root = document) => [...root.querySelectorAll(s)];
+  const drawer = $("#drawer"), bagItems = $("#bagItems"), bagCount = $("#bagCount"), bagTotal = $("#bagTotal");
+  const dialog = $("#productDialog"), detailImage = $("#detailImage"), detailTitle = $("#detailTitle");
+  const detailDescription = $("#detailDescription"), detailPrice = $("#detailPrice"), detailSize = $("#detailSize");
+  const sizeError = $("#sizeError"), detailAdd = $("#detailAdd");
+  const money = new Intl.NumberFormat("de-DE", {style:"currency",currency:"EUR"});
+  const STORAGE_KEY = "noire-bag-v2";
+  let cart = [], activeProduct = null, returnFocus = null;
 
   try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    if (Array.isArray(saved)) {
-      cart = saved.filter((item) =>
-        item &&
-        typeof item.name === "string" &&
-        Number.isFinite(Number(item.price)) &&
-        Number(item.price) >= 0 &&
-        Number.isInteger(Number(item.quantity)) &&
-        Number(item.quantity) > 0
-      ).map((item) => ({
-        name: item.name,
-        price: Number(item.price),
-        quantity: Number(item.quantity)
-      }));
-    }
-  } catch {
-    cart = [];
-  }
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    if (Array.isArray(stored)) cart = stored.filter(p =>
+      p && typeof p.name === "string" && Number.isFinite(Number(p.price)) &&
+      Number(p.price) >= 0 && typeof p.size === "string" &&
+      Number.isInteger(Number(p.quantity)) && Number(p.quantity) > 0
+    ).map(p => ({name:p.name, price:Number(p.price), size:p.size, quantity:Number(p.quantity)}));
+  } catch { cart = []; }
 
-  const saveCart = () => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
-    } catch {
-      // The bag remains usable for the current session if storage is unavailable.
-    }
+  const save = () => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch {}
   };
 
-  const render = () => {
-    const quantity = cart.reduce((sum, product) => sum + product.quantity, 0);
-    const subtotal = cart.reduce((sum, product) => sum + product.price * product.quantity, 0);
-    count.textContent = String(quantity);
-    count.setAttribute("aria-label", `${quantity} Artikel in der Bag`);
-    total.textContent = currency.format(subtotal);
-    items.replaceChildren();
-
+  const renderBag = () => {
+    const quantity = cart.reduce((sum,p)=>sum+p.quantity,0);
+    const subtotal = cart.reduce((sum,p)=>sum+p.price*p.quantity,0);
+    bagCount.textContent = String(quantity);
+    bagCount.setAttribute("aria-label", `${quantity} Artikel in der Bag`);
+    bagTotal.textContent = money.format(subtotal);
+    bagItems.replaceChildren();
     if (!cart.length) {
       const empty = document.createElement("p");
       empty.className = "bag-empty";
       empty.textContent = "Deine Bag ist noch leer.";
-      items.append(empty);
-      saveCart();
-      return;
+      bagItems.append(empty);
+    } else {
+      cart.forEach((p,index) => {
+        const row = document.createElement("div"); row.className = "bag-item";
+        const details = document.createElement("div"); details.className = "bag-item-details";
+        const name = document.createElement("span"); name.className = "bag-item-name"; name.textContent = p.name;
+        const variant = document.createElement("small"); variant.className = "bag-item-variant"; variant.textContent = `Größe ${p.size}`;
+        const price = document.createElement("small"); price.textContent = money.format(p.price);
+        details.append(name,variant,price);
+        const actions = document.createElement("div"); actions.className = "bag-item-actions";
+        const line = document.createElement("strong"); line.textContent = money.format(p.price*p.quantity);
+        const qty = document.createElement("div"); qty.className = "bag-qty";
+        const minus = document.createElement("button"); minus.type="button"; minus.dataset.qty="-1"; minus.dataset.index=String(index); minus.setAttribute("aria-label","Menge verringern"); minus.textContent="−";
+        const qtyText = document.createElement("span"); qtyText.textContent=String(p.quantity);
+        const plus = document.createElement("button"); plus.type="button"; plus.dataset.qty="1"; plus.dataset.index=String(index); plus.setAttribute("aria-label","Menge erhöhen"); plus.textContent="+";
+        qty.append(minus,qtyText,plus);
+        const remove = document.createElement("button"); remove.type="button"; remove.className="bag-remove"; remove.dataset.remove=String(index); remove.textContent="Entfernen";
+        actions.append(line,qty,remove); row.append(details,actions); bagItems.append(row);
+      });
     }
-
-    cart.forEach((product, index) => {
-      const row = document.createElement("div");
-      row.className = "bag-item";
-
-      const details = document.createElement("div");
-      details.className = "bag-item-details";
-
-      const name = document.createElement("span");
-      name.className = "bag-item-name";
-      name.textContent = product.name;
-
-      const price = document.createElement("small");
-      price.textContent = `${product.quantity} × ${currency.format(product.price)}`;
-
-      details.append(name, price);
-
-      const actions = document.createElement("div");
-      actions.className = "bag-item-actions";
-
-      const lineTotal = document.createElement("strong");
-      lineTotal.textContent = currency.format(product.price * product.quantity);
-
-      const remove = document.createElement("button");
-      remove.type = "button";
-      remove.className = "bag-remove";
-      remove.dataset.remove = String(index);
-      remove.setAttribute("aria-label", `${product.name} entfernen`);
-      remove.textContent = "Entfernen";
-
-      actions.append(lineTotal, remove);
-      row.append(details, actions);
-      items.append(row);
-    });
-
-    saveCart();
+    save();
   };
 
-  const openDrawer = () => {
-    drawer.classList.add("open");
-    drawer.setAttribute("aria-hidden", "false");
+  const openBag = () => {
+    drawer.classList.add("open"); drawer.setAttribute("aria-hidden","false");
     document.body.classList.add("drawer-is-open");
-    bagOpen?.setAttribute("aria-expanded", "true");
-    window.setTimeout(() => bagClose?.focus(), 50);
+    $("#bagOpen")?.setAttribute("aria-expanded","true");
+    $("#bagClose")?.focus();
   };
-
-  const closeDrawer = () => {
-    drawer.classList.remove("open");
-    drawer.setAttribute("aria-hidden", "true");
+  const closeBag = (restore=true) => {
+    drawer.classList.remove("open"); drawer.setAttribute("aria-hidden","true");
     document.body.classList.remove("drawer-is-open");
-    bagOpen?.setAttribute("aria-expanded", "false");
-    bagOpen?.focus();
+    $("#bagOpen")?.setAttribute("aria-expanded","false");
+    if (restore) $("#bagOpen")?.focus();
   };
 
-  $$(".filters button").forEach((button) => {
-    button.setAttribute("aria-pressed", button.classList.contains("selected") ? "true" : "false");
-    button.addEventListener("click", () => {
-      $$(".filters button").forEach((other) => {
-        const selected = other === button;
-        other.classList.toggle("selected", selected);
-        other.setAttribute("aria-pressed", String(selected));
-      });
+  const openProduct = (card, trigger) => {
+    const button = $(".add",card), image = $(".product-photo img",card), meta = $(".meta",card);
+    const name = button?.dataset.name;
+    const price = Number(button?.dataset.price);
+    if (!name || !Number.isFinite(price)) return;
+    activeProduct = {name,price};
+    returnFocus = trigger || button;
+    detailImage.src = image?.src || "";
+    detailImage.alt = image?.alt || name;
+    detailTitle.textContent = meta?.querySelector("span")?.childNodes[0]?.textContent?.trim() || name;
+    detailDescription.textContent = meta?.querySelector("small")?.textContent?.trim() || "NOIRÉ · Modern Luxury";
+    detailPrice.textContent = money.format(price);
+    detailSize.value = "";
+    sizeError.textContent = "";
+    dialog.classList.add("open");
+    dialog.setAttribute("aria-hidden","false");
+    document.body.classList.add("dialog-is-open");
+    window.setTimeout(()=>detailSize.focus(),100);
+  };
+  const closeProduct = () => {
+    dialog.classList.remove("open"); dialog.setAttribute("aria-hidden","true");
+    document.body.classList.remove("dialog-is-open");
+    activeProduct = null;
+    if (returnFocus?.focus) returnFocus.focus();
+  };
 
-      const filter = button.dataset.filter || "all";
-      $$(".products article").forEach((article) => {
-        const kinds = (article.dataset.kind || "").split(/\s+/);
-        article.hidden = filter !== "all" && !kinds.includes(filter);
-      });
-    });
+  $$(".products article").forEach(card => {
+    const open = (event) => openProduct(card,event.currentTarget);
+    $(".add",card)?.addEventListener("click",open);
+    $(".product-details-trigger",card)?.addEventListener("click",open);
   });
 
-  $$(".add").forEach((button) => {
-    button.addEventListener("click", () => {
-      const name = button.dataset.name?.trim();
-      const price = Number(button.dataset.price);
-      if (!name || !Number.isFinite(price) || price < 0) return;
-
-      const existing = cart.find((product) => product.name === name && product.price === price);
-      if (existing) existing.quantity += 1;
-      else cart.push({ name, price, quantity: 1 });
-
-      render();
-      openDrawer();
-    });
+  detailAdd?.addEventListener("click",()=>{
+    if (!activeProduct) return;
+    const size = detailSize.value;
+    if (!size) { sizeError.textContent="Bitte wähle zuerst deine Größe."; detailSize.focus(); return; }
+    const existing = cart.find(p=>p.name===activeProduct.name && p.size===size);
+    if (existing) existing.quantity += 1;
+    else cart.push({...activeProduct,size,quantity:1});
+    renderBag();
+    closeProduct();
+    openBag();
   });
+  detailSize?.addEventListener("change",()=>{sizeError.textContent="";});
+  $("#detailClose")?.addEventListener("click",closeProduct);
+  dialog?.addEventListener("click",e=>{if(e.target===dialog) closeProduct();});
 
-  items.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-remove]");
-    if (!button) return;
-    cart.splice(Number(button.dataset.remove), 1);
-    render();
-  });
-
-  bagOpen?.addEventListener("click", openDrawer);
-  bagClose?.addEventListener("click", closeDrawer);
-  drawer.addEventListener("click", (event) => {
-    if (event.target === drawer) closeDrawer();
-  });
-
-  menuButton?.setAttribute("aria-expanded", "false");
-  menuButton?.setAttribute("aria-controls", "nav");
-  menuButton?.addEventListener("click", () => {
-    const isOpen = nav?.classList.toggle("open") ?? false;
-    menuButton.setAttribute("aria-expanded", String(isOpen));
-    menuButton.setAttribute("aria-label", isOpen ? "Menü schließen" : "Menü öffnen");
-  });
-
-  $$("#nav a").forEach((link) => {
-    link.addEventListener("click", () => {
-      nav?.classList.remove("open");
-      menuButton?.setAttribute("aria-expanded", "false");
-      menuButton?.setAttribute("aria-label", "Menü öffnen");
-    });
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      if (drawer.classList.contains("open")) closeDrawer();
-      nav?.classList.remove("open");
-      menuButton?.setAttribute("aria-expanded", "false");
-      menuButton?.setAttribute("aria-label", "Menü öffnen");
+  bagItems?.addEventListener("click",e=>{
+    const qty=e.target.closest("[data-qty]");
+    const remove=e.target.closest("[data-remove]");
+    if (qty) {
+      const index=Number(qty.dataset.index), item=cart[index];
+      if (!item) return;
+      item.quantity += Number(qty.dataset.qty);
+      if (item.quantity<=0) cart.splice(index,1);
+      renderBag();
+    } else if (remove) {
+      cart.splice(Number(remove.dataset.remove),1);
+      renderBag();
     }
   });
 
-  drawer.setAttribute("aria-hidden", "true");
-  drawerPanel?.setAttribute("role", "dialog");
-  drawerPanel?.setAttribute("aria-modal", "true");
-  drawerPanel?.setAttribute("aria-label", "Deine Bag");
-  bagOpen?.setAttribute("aria-controls", "drawer");
-  bagOpen?.setAttribute("aria-expanded", "false");
-  render();
+  $("#bagOpen")?.addEventListener("click",openBag);
+  $("#bagClose")?.addEventListener("click",()=>closeBag());
+  drawer?.addEventListener("click",e=>{if(e.target===drawer) closeBag();});
+
+  $$(".filters button").forEach(button=>{
+    button.setAttribute("aria-pressed",String(button.classList.contains("selected")));
+    button.addEventListener("click",()=>{
+      $$(".filters button").forEach(other=>{
+        const selected=other===button;
+        other.classList.toggle("selected",selected);
+        other.setAttribute("aria-pressed",String(selected));
+      });
+      const filter=button.dataset.filter||"all";
+      $$(".products article").forEach(card=>{
+        card.hidden=filter!=="all" && !(card.dataset.kind||"").split(/\s+/).includes(filter);
+      });
+    });
+  });
+
+  const menuButton=$("#hamb"), nav=$("#nav");
+  menuButton?.setAttribute("aria-controls","nav");
+  menuButton?.setAttribute("aria-expanded","false");
+  menuButton?.addEventListener("click",()=>{
+    const opened=nav?.classList.toggle("open")||false;
+    menuButton.setAttribute("aria-expanded",String(opened));
+    menuButton.setAttribute("aria-label",opened?"Menü schließen":"Menü öffnen");
+  });
+  $$("#nav a").forEach(a=>a.addEventListener("click",()=>{
+    nav.classList.remove("open");
+    menuButton?.setAttribute("aria-expanded","false");
+    menuButton?.setAttribute("aria-label","Menü öffnen");
+  }));
+
+  document.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){
+      if(dialog?.classList.contains("open")) closeProduct();
+      else if(drawer?.classList.contains("open")) closeBag();
+      nav?.classList.remove("open");
+      menuButton?.setAttribute("aria-expanded","false");
+    }
+  });
+
+  drawer?.setAttribute("aria-hidden","true");
+  const panel=drawer?.querySelector("aside");
+  panel?.setAttribute("role","dialog"); panel?.setAttribute("aria-modal","true"); panel?.setAttribute("aria-label","Deine Bag");
+  $("#bagOpen")?.setAttribute("aria-controls","drawer");
+  $("#bagOpen")?.setAttribute("aria-expanded","false");
+  renderBag();
 })();
