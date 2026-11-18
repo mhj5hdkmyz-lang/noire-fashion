@@ -3,6 +3,7 @@
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
   const drawer = $("#drawer"), bagItems = $("#bagItems"), bagCount = $("#bagCount"), bagTotal = $("#bagTotal");
+  const checkoutButton = $("#checkoutButton"), checkoutMessage = $("#checkoutMessage");
   const dialog = $("#productDialog"), detailImage = $("#detailImage"), detailTitle = $("#detailTitle");
   const detailDescription = $("#detailDescription"), detailPrice = $("#detailPrice"), detailSize = $("#detailSize");
   const sizeError = $("#sizeError"), detailAdd = $("#detailAdd");
@@ -29,6 +30,8 @@
     bagCount.textContent = String(quantity);
     bagCount.setAttribute("aria-label", `${quantity} Artikel in der Bag`);
     bagTotal.textContent = money.format(subtotal);
+    if (checkoutButton) checkoutButton.disabled = cart.length === 0;
+    if (checkoutMessage) checkoutMessage.textContent = "";
     bagItems.replaceChildren();
     if (!cart.length) {
       const empty = document.createElement("p");
@@ -129,6 +132,27 @@
     } else if (remove) {
       cart.splice(Number(remove.dataset.remove),1);
       renderBag();
+    }
+  });
+
+  checkoutButton?.addEventListener("click", async () => {
+    if (!cart.length || checkoutButton.disabled) return;
+    checkoutButton.disabled = true;
+    checkoutButton.textContent = "WIRD VORBEREITET …";
+    checkoutMessage.textContent = "Du wirst sicher zur Kasse weitergeleitet.";
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({items: cart.map(({name,size,quantity}) => ({name,size,quantity}))})
+      });
+      const data = await response.json();
+      if (!response.ok || !data.url) throw new Error(data.error || "Checkout momentan nicht verfügbar.");
+      window.location.assign(data.url);
+    } catch (error) {
+      checkoutMessage.textContent = error.message || "Bitte versuche es später erneut.";
+      checkoutButton.disabled = cart.length === 0;
+      checkoutButton.textContent = "WEITER ZUR KASSE";
     }
   });
 

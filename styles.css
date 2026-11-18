@@ -154,3 +154,8 @@ img{max-width:100%}
  .detail-close{top:10px;right:10px;background:#eee9e1eF}
 }
 @media(prefers-reduced-motion:reduce){.product-dialog,.product-details-trigger,.detail-add{transition:none}}
+
+.checkout-message{min-height:18px;margin:8px 0;color:#8b3c37;font-size:10px;line-height:1.5}
+.sum button#checkoutButton{width:100%;min-height:48px;margin-top:14px;border:1px solid #171411;background:#171411;color:#eee9e1;font-size:9px;letter-spacing:.18em;cursor:pointer;transition:background .2s,color .2s}
+.sum button#checkoutButton:hover:not(:disabled){background:#b8a692;color:#171411}
+.sum button#checkoutButton:disabled{opacity:.45;cursor:not-allowed}
