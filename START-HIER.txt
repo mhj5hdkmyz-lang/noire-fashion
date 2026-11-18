@@ -1,0 +1,11 @@
+NOIRÉ – EINMALIGE EINRICHTUNG
+
+1) Dieses ZIP entpacken. Den Inhalt des Ordners „noire-next“ als vollständiges Projekt verwenden.
+2) Für GitHub Pages allein reicht dieses Projekt NICHT: Stripe benötigt den Node-Server (server.js). Verwende einen Node-fähigen Hoster.
+3) Beim Hoster Node.js 20+ wählen, Projekt bereitstellen, Build-Schritt leer lassen, Startbefehl: npm start.
+4) Im Hosting-Dashboard Umgebungsvariablen aus .env.example setzen. Niemals den echten Stripe-Geheimschlüssel in GitHub eintragen.
+5) In Stripe zunächst Testmodus aktivieren und einen Versandtarif erstellen. Klarna im Stripe-Konto aktivieren.
+6) Die Platzhalter in impressum.html, datenschutz.html, agb.html, widerruf.html und versand.html ersetzen. Rechtstexte vor Veröffentlichung prüfen lassen.
+7) Testbestellung am Handy und Desktop durchführen; erst danach Live-Schlüssel verwenden.
+
+WICHTIG: Ohne deine echten Verkäuferdaten, Steuer-/Versandentscheidungen, Stripe-Konto und Hosting kann niemand den Shop seriös als live-verkaufsbereit schalten.

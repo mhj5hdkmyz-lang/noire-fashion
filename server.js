@@ -53,6 +53,7 @@ app.post('/api/checkout', async (req, res) => {
     }
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
+      payment_method_types: ['card', 'klarna'],
       line_items,
       shipping_address_collection: {allowed_countries: ['DE']},
       shipping_options: [{shipping_rate: process.env.STRIPE_SHIPPING_RATE_ID}],

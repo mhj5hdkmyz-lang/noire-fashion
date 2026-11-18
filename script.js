@@ -100,9 +100,12 @@
   };
 
   $$(".products article").forEach(card => {
-    const open = (event) => openProduct(card,event.currentTarget);
-    $(".add",card)?.addEventListener("click",open);
-    $(".product-details-trigger",card)?.addEventListener("click",open);
+    const link = $(".product-link",card);
+    const details = $(".product-details-trigger",card);
+    const open = (event) => { event.preventDefault(); window.location.href = link?.href || "#shop"; };
+    link?.addEventListener("click",open);
+    details?.addEventListener("click",open);
+    $(".add",card)?.addEventListener("click",event=>{ event.preventDefault(); openProduct(card,event.currentTarget); });
   });
 
   detailAdd?.addEventListener("click",()=>{
@@ -204,4 +207,5 @@
   $("#bagOpen")?.setAttribute("aria-controls","drawer");
   $("#bagOpen")?.setAttribute("aria-expanded","false");
   renderBag();
+  if (new URLSearchParams(window.location.search).get("bag") === "1") openBag();
 })();

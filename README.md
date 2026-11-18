@@ -1,23 +1,35 @@
 # NOIRÉ — The Art of Modern Luxury
 
-NOIRÉ storefront prototype with a Stripe Checkout integration scaffold.
+Kompletter NOIRÉ-Shop mit sieben vorhandenen Artikeln, eigenen Produktdetailseiten, Größenwahl, Warenkorb, Stripe-Checkout und Informationsseiten.
 
-## Included
-- All seven existing product concepts and embedded product images retained.
-- Product detail overlay, sizes XS–XXL, persistent shopping bag and quantity controls.
-- Checkout button wired to a server-side `/api/checkout` endpoint.
-- Server-side product price validation (browser-submitted prices are never trusted).
-- Stripe-hosted Checkout, Germany-only shipping address collection, required billing address and phone number.
-- Branded payment success page.
+## Enthaltene Funktionen
+- Alle sieben vorhandenen Kleidungsstücke und eingebetteten Produktbilder bleiben erhalten.
+- Produktbilder, Produktnamen und „Produkt ansehen“ öffnen jeweils eine eigene Produktdetail-URL (`produkt.html?product=...`).
+- Größenwahl XS, S, M, L, XL und XXL vor dem Hinzufügen zur Bag.
+- Gemeinsamer Warenkorb mit gespeicherten Artikeln, Größen, Mengen und Zwischensumme.
+- Stripe Checkout auf dem Server; Preise werden serverseitig festgelegt und nicht aus dem Browser übernommen.
+- Kartenzahlung und Klarna als Checkout-Zahlungsarten (Klarna muss im Stripe-Konto aktiviert und verfügbar sein).
+- Seiten für Impressum, Datenschutz, AGB, Widerruf und Versand/Zahlung.
 
-## Run locally
-1. Install Node.js 20 or later.
-2. Run `npm install`.
-3. Copy `.env.example` to `.env` and fill in Stripe TEST credentials and a shipping rate ID created in Stripe Dashboard.
-4. Set `PUBLIC_BASE_URL=http://localhost:3000` for local testing.
-5. Run `npm start` and open `http://localhost:3000`.
+## Lokal starten
+1. Node.js 20 oder neuer installieren.
+2. Im Projektordner `npm install` ausführen.
+3. `.env.example` in `.env` kopieren.
+4. Stripe-Testschlüssel, eine in Stripe angelegte Versandtarif-ID und die Shop-URL in `.env` eintragen.
+5. `npm start` ausführen und `http://localhost:3000` öffnen.
 
-## Important — not live yet
-The checkout is not ready to accept real orders until a Stripe account, test/live API keys, shipping rate, deployed HTTPS backend, verified product/stock data, tax treatment, and the legal pages and policies are configured. Start with Stripe test keys and test cards. Do not put secret keys in `index.html`, `script.js`, GitHub, or any public repository. Keep `.env` private; only `.env.example` belongs in the repository.
+## Vor echtem Verkauf zwingend erledigen
+**Diese Version ist eine vollständige Shop-Grundlage, aber noch nicht live-verkaufsbereit.** Es fehlen Angaben und Kontoeinstellungen, die nur der Shopbetreiber bereitstellen kann:
+- Echte Verkäuferdaten in allen Rechtstexten (alle eckigen Klammern/Platzhalter ersetzen); Texte rechtlich prüfen lassen.
+- Stripe-Konto aktivieren, Live-Schlüssel sicher beim Hosting hinterlegen, Klarna-Verfügbarkeit prüfen und Versandtarif erstellen.
+- Eigene Domain mit HTTPS und Server-Hosting konfigurieren; `PUBLIC_BASE_URL` muss exakt auf die Live-Domain zeigen.
+- Steuerbehandlung/Umsatzsteuer, Versandkosten, Lieferzeiten, Rücksendeadresse und Retourenprozess festlegen.
+- Tatsächliche Warenverfügbarkeit, Material, Passform, Größentabellen, Pflegehinweise und Lieferzeiten für jedes Produkt bestätigen.
+- Bestellbestätigung, Kundenservice, Rechnungsstellung und Versandabwicklung einrichten und vor Livegang Testbestellungen durchführen.
 
-This project still contains concept products and example prices. Confirm that the products can actually be manufactured and sold before switching to live payments. Have the German legal, tax, privacy, shipping and returns setup reviewed before launch.
+Die Rechtstext-Seiten enthalten bewusst klar markierte Platzhalter, weil Name, Rechtsform, Geschäftsadresse, Steuerstatus und konkrete Shop-Dienste nicht erfunden werden dürfen. **Nicht unverändert veröffentlichen.**
+
+## Sicherheit
+- Niemals `.env` oder Stripe-Geheimschlüssel committen.
+- Nur `.env.example` gehört in GitHub.
+- Zuerst Stripe-Testmodus verwenden. Erst nach erfolgreichen Tests und vollständiger rechtlicher/steuerlicher Einrichtung Live-Zahlungen aktivieren.
