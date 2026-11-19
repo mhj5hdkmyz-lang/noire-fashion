@@ -1,9 +1,11 @@
 # NOIRÉ — The Art of Modern Luxury
 
-Kompletter NOIRÉ-Shop mit sieben vorhandenen Artikeln, eigenen Produktdetailseiten, Größenwahl, Warenkorb, Stripe-Checkout und Informationsseiten.
+Kompletter NOIRÉ-Shop mit den bestehenden Artikeln plus neun neuen Damen-Sculpt-Artikeln, eigenen Produktdetailseiten, Größenwahl, Warenkorb, Stripe-Checkout und Informationsseiten.
 
 ## Enthaltene Funktionen
-- Alle sieben vorhandenen Kleidungsstücke und eingebetteten Produktbilder bleiben erhalten.
+- Alle vorhandenen Kleidungsstücke und eingebetteten Produktbilder bleiben erhalten.
+- Neu: Sculpt Leggings, Sculpt Flared Pants und Matching Crop Tops, jeweils in Obsidian Black, Ivory Cream und Deep Plum (insgesamt neun neue Produktseiten).
+- Neu: Lieferantenbrief als HTML zum Drucken/PDF-Speichern und als Markdown zum Bearbeiten; inklusive Materialvorgaben, Logo-Positionen, Qualitätscheck und Anfrage-Mail.
 - Produktbilder, Produktnamen und „Produkt ansehen“ öffnen jeweils eine eigene Produktdetail-URL (`produkt.html?product=...`).
 - Größenwahl XS, S, M, L, XL und XXL vor dem Hinzufügen zur Bag.
 - Gemeinsamer Warenkorb mit gespeicherten Artikeln, Größen, Mengen und Zwischensumme.

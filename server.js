@@ -19,7 +19,16 @@ const catalog = {
   'NOIRÉ Premium Tee Ivory': 5900,
   'NOIRÉ Women Tee & Shorts Look': 11900,
   'NOIRÉ Essential Sweatwear': 9900,
-  'NOIRÉ Dark Plum Set': 14900
+  'NOIRÉ Dark Plum Set': 14900,
+  'NOIRÉ Women Sculpt Leggings Obsidian Black': 8900,
+  'NOIRÉ Women Sculpt Leggings Ivory Cream': 8900,
+  'NOIRÉ Women Sculpt Leggings Deep Plum': 8900,
+  'NOIRÉ Women Sculpt Flared Pants Obsidian Black': 9900,
+  'NOIRÉ Women Sculpt Flared Pants Ivory Cream': 9900,
+  'NOIRÉ Women Sculpt Flared Pants Deep Plum': 9900,
+  'NOIRÉ Women Matching Crop Top Obsidian Black': 6900,
+  'NOIRÉ Women Matching Crop Top Ivory Cream': 6900,
+  'NOIRÉ Women Matching Crop Top Deep Plum': 6900
 };
 const validSizes = new Set(['XS','S','M','L','XL','XXL']);
 

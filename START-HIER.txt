@@ -9,3 +9,8 @@ NOIRÉ – EINMALIGE EINRICHTUNG
 7) Testbestellung am Handy und Desktop durchführen; erst danach Live-Schlüssel verwenden.
 
 WICHTIG: Ohne deine echten Verkäuferdaten, Steuer-/Versandentscheidungen, Stripe-Konto und Hosting kann niemand den Shop seriös als live-verkaufsbereit schalten.
+
+NEU IN DIESER VERSION:
+- 9 Damen-Produkte: Sculpt Leggings, Flared Pants und Matching Crop Tops in Schwarz, Ivory Cream und Deep Plum.
+- Lieferantenbrief: NOIRE-Lieferantenbrief-Womens-Sculpt-Edit.html (im Browser öffnen und drucken) sowie .md zum Bearbeiten.
+- Preise im Shop sind weiterhin unverbindliche Design-/Beispielpreise, bis deine Produktion kalkuliert ist.
