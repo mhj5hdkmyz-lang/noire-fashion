@@ -1,0 +1,16 @@
+NOIRÉ – aktualisierte Shop-Bilder
+
+Dieses Paket enthält den vollständigen Shop mit den neuen Bilddateien und bereits angepassten Bildpfaden in:
+- products.json (Produktdetailseiten)
+- index.html (Produktkarten auf der Startseite)
+
+So in GitHub einsetzen:
+1. Repository noire-fashion öffnen, Branch main.
+2. Den Inhalt dieses ZIPs entpacken.
+3. Alle enthaltenen Dateien und Ordner in das Repository-Hauptverzeichnis hochladen.
+4. Vorhandene Dateien ersetzen lassen (insbesondere index.html und products.json).
+5. Commit changes.
+
+Wichtig: Nicht den ZIP-Ordner als Unterordner in das Repository legen. Die Dateien müssen direkt im Hauptverzeichnis liegen, damit die relativen Pfade funktionieren.
+
+Die Produktmotive sind KI-generierte Werbe-/Editorialbilder und keine verifizierten Herstellerfotos. Vor einem echten Verkauf bitte Passform, Stoff, Logoausführung und Produktfarben mit den tatsächlichen Produkten abgleichen.
