@@ -62,7 +62,9 @@ app.post('/api/checkout', async (req, res) => {
     }
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
-      payment_method_types: ['card', 'klarna'],
+      // Apple Pay and Google Pay are offered as eligible card-wallet options by Stripe Checkout.
+      // All methods must also be enabled and approved in the Stripe Dashboard.
+      payment_method_types: ['card', 'paypal', 'klarna', 'sepa_debit', 'link'],
       line_items,
       shipping_address_collection: {allowed_countries: ['DE']},
       shipping_options: [{shipping_rate: process.env.STRIPE_SHIPPING_RATE_ID}],

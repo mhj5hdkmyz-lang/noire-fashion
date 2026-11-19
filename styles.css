@@ -165,3 +165,6 @@ img{max-width:100%}
 .women-collection-intro{max-width:760px;margin:0 auto 28px;text-align:center;padding:20px 24px;border-top:1px solid rgba(23,20,17,.16);border-bottom:1px solid rgba(23,20,17,.16)}
 .women-collection-intro p{margin:8px 0 0;color:var(--muted,#777);font-size:.92rem;line-height:1.7}
 .products article[data-kind~="women"] .product-photo img{object-fit:cover;object-position:center}
+
+/* NOIRÉ payment-method note in the bag drawer */
+.payment-note{display:block;margin-top:12px;color:#8b8177;font-size:10px;line-height:1.7;letter-spacing:.04em;text-align:center}
